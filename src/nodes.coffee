@@ -1276,6 +1276,11 @@ exports.Code = class Code extends Base
     @bound   = tag is 'boundfunc'
     @context = '_this' if @bound
 
+    # Detect generator function
+    @generator = false
+    @body.traverseChildren false, (child) =>
+      @generator = true if child.value == 'yield'
+
   children: ['params', 'body']
 
   isStatement: -> !!@ctor
@@ -1334,6 +1339,7 @@ exports.Code = class Code extends Base
         o.scope.parent.assign '_this', 'this'
     idt   = o.indent
     code  = 'function'
+    code  += '*' if @generator
     code  += ' ' + @name if @ctor
     code  += '('
     answer = [@makeCode(code)]

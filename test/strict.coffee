@@ -9,7 +9,7 @@
 # * `delete` operand is a variable
 # * `delete` operand is a parameter
 # * `delete` operand is `undefined`
-# * `Future Reserved Word`s as identifiers: implements, interface, let, package, private, protected, public, static, yield
+# * `Future Reserved Word`s as identifiers: implements, interface, let, package, private, protected, public, static
 # * `eval` or `arguments` as `catch` identifier
 # * `eval` or `arguments` as formal parameter
 # * `eval` or `arguments` as function declaration identifier
@@ -140,7 +140,7 @@ test "`Future Reserved Word`s, `eval` and `arguments` restrictions", ->
   tryCatch = (keyword, check = strict) ->
     check "try new Error catch #{keyword}"
 
-  future = 'implements interface let package private protected public static yield'.split ' '
+  future = 'implements interface let package private protected public static'.split ' '
   for keyword in future
     access   keyword
     assign   keyword
